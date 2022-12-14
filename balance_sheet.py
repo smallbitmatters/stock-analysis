@@ -18,10 +18,7 @@ class BalanceSheet:
                                  current_assets_loans_advances2)
 
     def get_current_liabilities_and_provisions(self, tree):
-        current_liabilities_and_provisions = trying(
-            tree, '//*[@id="leftcontainer"]/table/tbody/tr[21]/td[2]'
-        )
-        return current_liabilities_and_provisions
+        return trying(tree, '//*[@id="leftcontainer"]/table/tbody/tr[21]/td[2]')
 
     def get_total_net_current_assets(self, tree):
         return trying(

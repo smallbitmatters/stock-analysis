@@ -6,7 +6,7 @@ from get_stock_data import _get_company_primary_stats as get_company_primary_sta
 from company_page import CompanyPage
 
 stock_company = "NTPC"
-page = requests.get('http://money.rediff.com/%s' % stock_company)
+page = requests.get(f'http://money.rediff.com/{stock_company}')
 tree = html.fromstring(page.text)
 company = CompanyPage(tree)
 

@@ -47,7 +47,7 @@ def _get_company_primary_stats(company, tree):
 
 def company_page_analysis(stock_company):
     try:
-        page = requests.get('http://money.rediff.com/%s' % stock_company)
+        page = requests.get(f'http://money.rediff.com/{stock_company}')
         time.sleep(1)
         tree = html.fromstring(page.content)
         company = CompanyPage(tree)
@@ -82,21 +82,19 @@ def company_page_analysis(stock_company):
         #    return
 
         if TESTING:
-            print('primary_stats: {}'.format(primary_stats))
+            print(f'primary_stats: {primary_stats}')
         conditions = [
             pe_ratio_min, pe_ratio_max, eps_cond, price_somewhr_in_middle
         ]
         if TESTING:
-            print('all_conditions: {}'.format(conditions))
-        if all(conditions) is True:
+            print(f'all_conditions: {conditions}')
+        if all(conditions):
             # get all links
             balance_sheet_link = company.get_balance_sheet_link(tree)
             ratio_link = company.get_ratio_link(tree)
 
             # go to balance sheet page for further analysis
-            balance_sheet_page = requests.get(
-                '%s' % ''.join(balance_sheet_link)
-            )
+            balance_sheet_page = requests.get(f"{''.join(balance_sheet_link)}")
             balance_sheet_tree = html.fromstring(balance_sheet_page.content)
             balance_sheet = BalanceSheet(balance_sheet_tree)
             current_liabilities_and_provisions = balance_sheet.get_current_liabilities_and_provisions(balance_sheet_tree)
@@ -114,17 +112,15 @@ def company_page_analysis(stock_company):
                       ))
             if total_net_current_assets > current_liabilities_and_provisions:
                 if TESTING:
-                    print(
-                        'company {} has net asset greater than net liabilities'
-                        .format(stock_company))
+                    print(f'company {stock_company} has net asset greater than net liabilities')
                 # go to ratio page
-                ratio_page = requests.get('%s' % ''.join(ratio_link))
+                ratio_page = requests.get(f"{''.join(ratio_link)}")
                 ratio_tree = html.fromstring(ratio_page.content)
                 ratio = Ratio(ratio_tree)
                 if TESTING:
                     print(
-                        'ratio consistent_dividend_payout: {}'.format(
-                            ratio.consistent_dividend_payout(ratio_tree)))
+                        f'ratio consistent_dividend_payout: {ratio.consistent_dividend_payout(ratio_tree)}'
+                    )
                 if ratio.consistent_dividend_payout(ratio_tree):
                     print('{stock_company} ! total_net_current_assets: {total_net_current_assets} ! current_liabilities_and_provisions: {current_liabilities_and_provisions}'.format(
                           stock_company=stock_company.strip(),
@@ -137,12 +133,8 @@ def company_page_analysis(stock_company):
 
 
 def companies_to_investigate():
-    companies = []
     f = open('top_500_companies.txt', 'r')
-    for company in f:
-        companies.append(company)
-
-    return companies
+    return list(f)
 
 
 if __name__ == '__main__':
