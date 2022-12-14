@@ -2,10 +2,8 @@ from lxml import html
 
 from ratio_module import Ratio
 
-f = open(r"tests/ratio_page_content", 'rb')
-ratio_page_content = f.read()
-f.close()
-
+with open(r"tests/ratio_page_content", 'rb') as f:
+    ratio_page_content = f.read()
 ratio_tree = html.fromstring(ratio_page_content)
 ratio = Ratio(ratio_tree)
 

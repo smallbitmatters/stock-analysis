@@ -7,16 +7,13 @@ class CompanyPage:
         self.tree = tree
 
     def get_pe_ratio(self, tree):
-        pe_ratio = trying(tree, '//*[@id="div_rcard_more"]/div[1]/div[2]')
-        return pe_ratio
+        return trying(tree, '//*[@id="div_rcard_more"]/div[1]/div[2]')
 
     def get_eps(self, tree):
-        eps = trying(tree, '//*[@id="div_rcard_more"]/div[2]/div[2]')
-        return eps
+        return trying(tree, '//*[@id="div_rcard_more"]/div[2]/div[2]')
 
     def get_price_of_stock(self, tree):
-        pos = trying(tree, '//*[@id="ltpid"]')
-        return pos
+        return trying(tree, '//*[@id="ltpid"]')
 
     def get_fifty_two_wk_high(self, tree):
         return (

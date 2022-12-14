@@ -7,26 +7,17 @@ class Ratio:
         self.tree = tree
 
     def get_present_year_dividend_present_year_dividend_per_share(self, tree):
-        p1 = trying(
-            tree, '//*[@id="leftcontainer"]/table/tbody/tr[6]/td[2]'
-        )
-        return p1
+        return trying(tree, '//*[@id="leftcontainer"]/table/tbody/tr[6]/td[2]')
 
     def get_present_year_dividend_present_year_dividend_per_share_minus1(
         self, tree
     ):
-        p2 = trying(
-            tree, '//*[@id="leftcontainer"]/table/tbody/tr[6]/td[3]'
-        )
-        return p2
+        return trying(tree, '//*[@id="leftcontainer"]/table/tbody/tr[6]/td[3]')
 
     def get_present_year_dividend_present_year_dividend_per_share_minus2(
         self, tree
     ):
-        p3 = trying(
-            tree, '//*[@id="leftcontainer"]/table/tbody/tr[6]/td[4]'
-        )
-        return p3
+        return trying(tree, '//*[@id="leftcontainer"]/table/tbody/tr[6]/td[4]')
 
     def get_present_year_dividend_present_year_dividend_per_share_minus3(
         self, tree

@@ -2,10 +2,8 @@ from lxml import html
 
 from balance_sheet import BalanceSheet
 
-f = open(r"tests/balance_sheet_page_content")
-balance_sheet_page_content = f.read()
-f.close()
-
+with open(r"tests/balance_sheet_page_content") as f:
+    balance_sheet_page_content = f.read()
 balance_sheet_tree = html.fromstring(balance_sheet_page_content)
 balance_sheet = BalanceSheet(balance_sheet_tree)
 
